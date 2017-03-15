@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<style type="text/css">
+.ans_wrap{background:#eee;font-size:14px}
+.ans_wrap pre{padding-left:10px}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 처음부터 순서대로 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li>one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+				</ul>
+			</div>
+			<button type="button">plus</button>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	var examBox = $('.exam_wrap:eq(0)'),
+		orderList = examBox.find('ul li'),
+		thisBtn = examBox.find('button'),
+		currentIndex = 0;
+	var orderColor = function() {
+		orderList.eq(currentIndex).css('background', 'skyblue');
+		currentIndex += 1;
+	}
+	thisBtn.on('click', orderColor);
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 마지막부터 역순대로 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li>one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+				</ul>
+			</div>
+			<button type="button">minus</button>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	var examBox2 = $('.exam_wrap:eq(1)'),
+		orderList2 = examBox2.find('ul li'),
+		thisBtn2 = examBox2.find('button'),
+		currentIndex2 = orderList2.length -1;
+	var inverseColor = function() {
+		orderList2.eq(currentIndex2).css('background', 'skyblue');
+		currentIndex2 -= 1;
+	}
+	thisBtn2.on('click', inverseColor);
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<ul>
+					<li style="background-color:yellow">one</li>
+					<li>two</li>
+					<li>three</li>
+					<li>four</li>
+					<li>five</li>
+					<li>six</li>
+					<li>seven</li>
+					<li>eight</li>
+					<li>nine</li>
+				</ul>
+			</div>
+			<button type="button">plus</button>
+			<button type="button">minus</button>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	var examBox3 = $('.exam_wrap:eq(2)'),
+		orderList3 = examBox3.find('ul li'),
+		thisBtnPlus = examBox3.find('button:eq(0)'),
+		thisBtnMinus = examBox3.find('button:eq(1)'),
+		currentIndex3 = 1;
+	var changColor = function() {
+		orderList3.eq(currentIndex3).css('background', 'skyblue');
+		orderList3.eq(currentIndex3 - 1).removeAttr('style');
+		currentIndex3 += 1;
+	}
+	var changColor2 = function() {
+		currentIndex3 -= 1;
+		orderList3.eq(currentIndex3).removeAttr('style');
+		orderList3.eq(currentIndex3 - 1).css('background', 'skyblue');
+	}
+	thisBtnPlus.on('click', changColor);
+	thisBtnMinus.on('click', changColor2);
+}</pre>
+		</div>
+        <div class="exam_wrap">
+            <h1>Q. 순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.(클래스 제어)</h1>
+            <div class="exam_q"><!-- 부모 -->
+                <ul>
+                    <li class="active">one</li>
+                    <li>two</li>
+                    <li>three</li>
+                    <li>four</li>
+                    <li>five</li>
+                    <li>six</li>
+                    <li>seven</li>
+                    <li>eight</li>
+                    <li>nine</li>
+                </ul>
+            </div>
+            <button type="button">plus</button>
+            <button type="button">minus</button>
+        </div>
+        <div class="ans_wrap">
+			<pre>
+$(function(){
+	var examBox4 = $('.exam_wrap:eq(3)'),
+		orderList4 = examBox4.find('ul li'),
+		addClass = examBox4.find('button:eq(0)'),
+		removeClass = examBox4.find('button:eq(1)'),
+		currentIndex4 = 1;
+	var changClass = function() {
+		orderList4.eq(currentIndex4).addClass('active');
+		orderList4.eq(currentIndex4 - 1).removeClass('active');
+		currentIndex4 += 1;
+	}
+	var changClass2 = function() {
+		currentIndex4 -= 1;
+		orderList4.eq(currentIndex4).removeClass('active');
+		orderList4.eq(currentIndex4 - 1).addClass('active');
+	}
+	addClass.on('click', changClass);
+	removeClass.on('click', changClass2);
+}</pre>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+
+<script type="text/javascript">
+$(function(){
+	var examBox = $('.exam_wrap:eq(0)'),
+		orderList = examBox.find('ul li'),
+		thisBtn = examBox.find('button'),
+		currentIndex = 0;
+	var orderColor = function() {
+		orderList.eq(currentIndex).css('background', 'skyblue');
+		currentIndex += 1;
+	}
+	thisBtn.on('click', orderColor);
+
+	var examBox2 = $('.exam_wrap:eq(1)'),
+		orderList2 = examBox2.find('ul li'),
+		thisBtn2 = examBox2.find('button'),
+		currentIndex2 = orderList2.length -1;
+	var inverseColor = function() {
+		orderList2.eq(currentIndex2).css('background', 'skyblue');
+		currentIndex2 -= 1;
+	}
+	thisBtn2.on('click', inverseColor);
+
+	var examBox3 = $('.exam_wrap:eq(2)'),
+		orderList3 = examBox3.find('ul li'),
+		thisBtnPlus = examBox3.find('button:eq(0)'),
+		thisBtnMinus = examBox3.find('button:eq(1)'),
+		currentIndex3 = 1;
+	var changColor = function() {
+		orderList3.eq(currentIndex3).css('background', 'skyblue');
+		orderList3.eq(currentIndex3 - 1).removeAttr('style');
+		currentIndex3 += 1;
+	}
+	var changColor2 = function() {
+		currentIndex3 -= 1;
+		orderList3.eq(currentIndex3).removeAttr('style');
+		orderList3.eq(currentIndex3 - 1).css('background', 'skyblue');
+	}
+	thisBtnPlus.on('click', changColor);
+	thisBtnMinus.on('click', changColor2);
+
+	var examBox4 = $('.exam_wrap:eq(3)'),
+		orderList4 = examBox4.find('ul li'),
+		addClass = examBox4.find('button:eq(0)'),
+		removeClass = examBox4.find('button:eq(1)'),
+		currentIndex4 = 1;
+	var changClass = function() {
+		orderList4.eq(currentIndex4).addClass('active');
+		orderList4.eq(currentIndex4 - 1).removeClass('active');
+		currentIndex4 += 1;
+	}
+	var changClass2 = function() {
+		currentIndex4 -= 1;
+		orderList4.eq(currentIndex4).removeClass('active');
+		orderList4.eq(currentIndex4 - 1).addClass('active');
+	}
+	addClass.on('click', changClass);
+	removeClass.on('click', changClass2);
+});
+</script>
+</body>
+</html>

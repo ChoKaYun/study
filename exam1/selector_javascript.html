@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<style type="text/css">
+.ans_wrap{background:#eee;font-size:14px}
+.ans_wrap pre{padding-left:10px}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 모든 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("*")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam1 = document.getElementsByClassName('exam_wrap')[0];
+	exam1.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam1.getElementsByClassName('exam_q')[0].children;
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 태그명이 span 인 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam2 = document.getElementsByClassName('exam_wrap')[1];
+	exam2.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam2.getElementsByTagName('span');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. em의 자손이면서 태그명이 span 인 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E F")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam3 = document.getElementsByClassName('exam_wrap')[2];
+	exam3.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam3.getElementsByTagName('em');
+		for(var i = 0; i < examChild.length; i++){
+			var box1 = examChild[i].querySelector('span');
+			box1.style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 부모의 바로 아래 자식이면서 태그명이 span 인 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E>F")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam4 = document.getElementsByClassName('exam_wrap')[3];
+	exam4.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam4.getElementsByTagName('span');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. div의 형제 엘리먼트로 바로 다음에 나오는 p와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E+F")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam5 = document.getElementsByClassName('exam_wrap')[4];
+	exam5.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam5.querySelectorAll('.exam_q div + p');
+		for(var i = 0; i < examChild.length; i++) {
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. div의 형제 엘리먼트로 다음에 나오는 모든 엘리먼트 span과 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<p>p</p>
+				<span>span</span>
+				<em>em<span>span</span></em>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E~F")</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam6 = document.getElementsByClassName('exam_wrap')[5];
+	exam6.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam6.querySelectorAll('.exam_q div ~ span');
+		for(var i = 0; i < examChild.length; i++) {
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 클래스명 active를 가지는 모든 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>div</div>
+				<div class="active">div</div>
+				<p class="active">p</p>
+				<span class="active">span</span>
+				<span>span</span>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E.C") E의 생략은 *.C와 동일함.</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam7 = document.getElementsByClassName('exam_wrap')[6];
+	exam7.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam7.getElementsByClassName('active');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 아이디가 active인 엘리먼트와 일치하게 하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div id="active">div</div>
+				<div class="active">div</div>
+				<p class="active">p</p>
+				<span class="active">span</span>
+				<span>span</span>
+			</div>
+			<button type="button" class="btn_view">view</button>
+			<p>Tip) $("E#I") E의 생략은 *#I와 동일함.</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+window.onload = function(){
+	var exam8 = document.getElementsByClassName('exam_wrap')[7];
+	exam8.getElementsByTagName('button')[0].onclick = function () {
+		var box1 = document.getElementById('active');
+		box1.style.backgroundColor = 'skyblue';
+	};
+}</pre>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+
+<script type="text/javascript">
+window.onload = function(){
+	var exam1 = document.getElementsByClassName('exam_wrap')[0];
+	exam1.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam1.getElementsByClassName('exam_q')[0].children;
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam2 = document.getElementsByClassName('exam_wrap')[1];
+	exam2.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam2.getElementsByTagName('span');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam3 = document.getElementsByClassName('exam_wrap')[2];
+	exam3.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam3.getElementsByTagName('em');
+		for(var i = 0; i < examChild.length; i++){
+			var box1 = examChild[i].querySelector('span');
+			box1.style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam4 = document.getElementsByClassName('exam_wrap')[3];
+	exam4.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam4.getElementsByTagName('span');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam5 = document.getElementsByClassName('exam_wrap')[4];
+	exam5.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam5.querySelectorAll('.exam_q div + p');
+		for(var i = 0; i < examChild.length; i++) {
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam6 = document.getElementsByClassName('exam_wrap')[5];
+	exam6.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam6.querySelectorAll('.exam_q div ~ span');
+		for(var i = 0; i < examChild.length; i++) {
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam7 = document.getElementsByClassName('exam_wrap')[6];
+	exam7.getElementsByTagName('button')[0].onclick = function () {
+		var examChild = exam7.getElementsByClassName('active');
+		for(var i = 0; i < examChild.length; i++){
+			examChild[i].style.backgroundColor = 'skyblue';
+		}
+	};
+ 
+	var exam8 = document.getElementsByClassName('exam_wrap')[7];
+	exam8.getElementsByTagName('button')[0].onclick = function () {
+		var box1 = document.getElementById('active');
+		box1.style.backgroundColor = 'skyblue';
+	};
+}
+</script>
+</body>
+</html>

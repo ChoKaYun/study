@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="common.css" />
+<style type="text/css">
+.ans_wrap{background:#eee;font-size:14px}
+.ans_wrap pre{padding-left:10px}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+	<!-- header [s] -->
+	<div id="header">
+	</div>
+	<!-- header [e] -->
+	<hr />
+	<!-- container [s] -->
+	<div id="container">
+		<div class="exam_wrap">
+			<h1>Q. 처음으로 일치하는 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1<em>em</em></div>
+				<div>2<em>em</em></div>
+				<div>3<em>em</em></div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :first / .first()</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(0)').find('button').on('click', function(){
+		$('.exam_wrap:eq(0)').find('.exam_q div').first().css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 마지막으로 일치하는 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1<em>em</em></div>
+				<div>2<em>em</em></div>
+				<div>3<em>em</em></div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :last / .last()</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(1)').find('button').on('click', function(){
+		$('.exam_wrap:eq(1)').find('.exam_q div').last().css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 첫번째 자식 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1<em>em</em></div>
+				<div>2<em>em</em></div>
+				<div>3<em>em</em></div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :first-child</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(2)').find('button').on('click', function(){
+		$('.exam_wrap:eq(2)').find('.exam_q div:first-child em').css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 마지막 자식 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1<em>em</em></div>
+				<div>2<em>em</em></div>
+				<div>3<em>em</em></div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :last-child</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(3)').find('button').on('click', function(){
+		$('.exam_wrap:eq(3)').find('.exam_q div:last-child em').css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 2번째 자식 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1</div>
+				<div>2<div>child1</div></div>
+				<div>3<div>child1</div><div>child2</div></div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :nth-child(n)</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(4)').find('button').on('click', function(){
+		$('.exam_wrap:eq(4)').find('.exam_q div:nth-child(2) div').css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 3번째로 일치하는 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>6</div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :eq(n) / .eq(n)</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(5)').find('button').on('click', function(){
+		$('.exam_wrap:eq(5)').find('.exam_q div:eq(2)').css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 3번째 엘리먼트 이후의 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>6</div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :gt(n) / .nextAll()</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(6)').find('button').on('click', function(){
+		$('.exam_wrap:eq(6)').find('.exam_q div:eq(2)').nextAll().css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+		<div class="exam_wrap">
+			<h1>Q. 3번째 엘리먼트 이전의 엘리먼트를 반환하시오.</h1>
+			<div class="exam_q"><!-- 부모 -->
+				<div>1</div>
+				<div>2</div>
+				<div>3</div>
+				<div>4</div>
+				<div>5</div>
+				<div>6</div>
+			</div>
+			<button type="button">view</button>
+			<p>Tip) :lt(n) / .prevAll()</p>
+		</div>
+		<div class="ans_wrap">
+			<pre>
+$(function(){
+	$('.exam_wrap:eq(7)').find('button').on('click', function(){
+		$('.exam_wrap:eq(7)').find('.exam_q div:eq(2)').prevAll().css('background-color', 'skyblue');
+	});
+}</pre>
+		</div>
+	</div>
+	<!-- container [e] -->
+	<hr />
+	<!-- footer [s] -->
+	<div id="footer">
+	</div>
+	<!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('.exam_wrap:eq(0)').find('button').on('click', function(){
+		$('.exam_wrap:eq(0)').find('.exam_q div').first().css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(1)').find('button').on('click', function(){
+		$('.exam_wrap:eq(1)').find('.exam_q div').last().css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(2)').find('button').on('click', function(){
+		$('.exam_wrap:eq(2)').find('.exam_q div:first-child em').css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(3)').find('button').on('click', function(){
+		$('.exam_wrap:eq(3)').find('.exam_q div:last-child em').css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(4)').find('button').on('click', function(){
+		$('.exam_wrap:eq(4)').find('.exam_q div:nth-child(2) div').css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(5)').find('button').on('click', function(){
+		$('.exam_wrap:eq(5)').find('.exam_q div:eq(2)').css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(6)').find('button').on('click', function(){
+		$('.exam_wrap:eq(6)').find('.exam_q div:eq(2)').nextAll().css('background-color', 'skyblue');
+	});
+
+	$('.exam_wrap:eq(7)').find('button').on('click', function(){
+		$('.exam_wrap:eq(7)').find('.exam_q div:eq(2)').prevAll().css('background-color', 'skyblue');
+	});
+});
+</script>
+</body>
+</html>
