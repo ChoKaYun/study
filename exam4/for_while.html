@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="css/common.css" />
+<style type="text/css">
+body{background:#e6e6e6}
+.exam_wrap{margin-top:30px;padding:20px;background:#fff}
+.exam_q{margin-top:20px}
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+    <!-- header [s] -->
+    <div id="header">
+    </div>
+    <!-- header [e] -->
+    <hr />
+    <!-- container [s] -->
+    <div id="container">
+        <div class="exam_wrap">
+            <h1>Q1. 5개의 input 중 짝수는 text / 홀수는 checkbox 를 만들어보기</h1>
+            <div class="exam_q"><!-- 부모 -->
+            </div>
+        </div>
+        <div class="exam_wrap">
+            <h1>Q2. 구구단 7단을 반복문을 이용해 만들어보기</h1>
+            <div class="exam_q"><!-- 부모 -->
+            </div>
+        </div>
+        <div class="exam_wrap">
+            <h1>Q3. 반복문 if/while 문을 이용해 모든 구구단 만들어보기</h1>
+            <div class="exam_q"><!-- 부모 -->
+            </div>
+        </div>
+    </div>
+    <!-- container [e] -->
+    <hr />
+    <!-- footer [s] -->
+    <div id="footer">
+    </div>
+    <!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function () {
+    // 짝수는 text / 홀수는 checkbox 
+    var funcInput = {
+        init : function () {
+            this.setElements();
+            this.inputEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(0);
+        },
+        inputEvent : function () {
+            for(var i=0 ; i<5 ; i++) {
+                if(i % 2 == 0){
+                    this.obj.append('<div><input id="oddInput' + i + '" type="text"><label for="oddInput' + i + '">짝수</label></div>');
+                } else {
+                    this.obj.append('<div><input id="oddInput' + i + '" type="checkbox"><label for="oddInput' + i + '">홀수</label></div>');
+                }
+            }
+        }
+    };
+    funcInput.init();
+
+    //구구단 7단
+    var guguDan7 = {
+        init : function () {
+            this.setElements();
+            this.guguDanEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(1);
+        },
+        guguDanEvent : function () {
+            for(var i=1 ; i<10 ; i++) {
+                this.obj.append('<p>' + '7' + ' * ' + i + ' = ' + (7 * i) + '</p>');
+            }
+        }
+    };
+    guguDan7.init();
+
+    // 구구단 2~9단
+    var guguDanAll = {
+        init : function() {
+            this.setElements();
+            this.guguDanEvent();
+        },
+        setElements : function() {
+            this.obj = $('.exam_wrap').eq(2);
+            startNum = 2;
+        },
+        guguDanEvent : function() {
+            while (startNum < 10) {
+                for(var i=1 ; i<10 ; i++) {
+                    this.obj.append('<p>' + startNum + ' * ' + i + ' = ' + (startNum * i) + '</p>');
+                }
+                startNum++;
+            }
+        }
+    };
+    guguDanAll.init();
+});
+</script>
+</body>
+</html>
