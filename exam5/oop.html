@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>exam</title>
+<link rel="stylesheet" href="css/common.css" />
+<style type="text/css">
+
+</style>
+</head>
+<body>
+<!-- wrapper [s] -->
+<div id="wrapper">
+    <!-- header [s] -->
+    <div id="header">
+    </div>
+    <!-- header [e] -->
+    <hr />
+    <!-- container [s] -->
+    <div id="container">
+        <div class="art_wrap">
+            <h1 class="sect_tit">Exam2, Exam3</h1>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q1. 처음부터 순서대로 일치하게 하시오.</h2>
+                <div class="exam_q"><!-- 부모 -->
+                    <ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                    </ul>
+                </div>
+                <button type="button">plus</button>
+            </div>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q2. 마지막부터 역순대로 일치하게 하시오.</h2>
+                <div class="exam_q"><!-- 부모 -->
+                    <ul>
+                        <li>one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                    </ul>
+                </div>
+                <button type="button">minus</button>
+            </div>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q3. 순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.</h2>
+                <div class="exam_q"><!-- 부모 -->
+                    <ul>
+                        <li style="background-color:yellow">one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                        <li>nine</li>
+                    </ul>
+                </div>
+                <button type="button">plus</button>
+                <button type="button">minus</button>
+            </div>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q4. 순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.(클래스 제어)</h2>
+                <div class="exam_q"><!-- 부모 -->
+                    <ul>
+                        <li class="active">one</li>
+                        <li>two</li>
+                        <li>three</li>
+                        <li>four</li>
+                        <li>five</li>
+                        <li>six</li>
+                        <li>seven</li>
+                        <li>eight</li>
+                        <li>nine</li>
+                    </ul>
+                </div>
+                <button type="button">plus</button>
+                <button type="button">minus</button>
+            </div>
+        </div>
+        <div class="art_wrap">
+            <h1 class="sect_tit">Exam4</h1>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q1. 5개의 input 중 짝수는 text / 홀수는 checkbox 를 만들어보기</h2>
+                <div class="exam_q"><!-- 부모 -->
+                </div>
+            </div>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q2. 구구단 7단을 반복문을 이용해 만들어보기</h2>
+                <div class="exam_q"><!-- 부모 -->
+                </div>
+            </div>
+            <div class="exam_wrap">
+                <h2 class="exam_tit">Q3. 반복문 if/while 문을 이용해 모든 구구단 만들어보기</h2>
+                <div class="exam_q"><!-- 부모 -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container [e] -->
+    <hr />
+    <!-- footer [s] -->
+    <div id="footer">
+    </div>
+    <!-- footer [e] -->
+</div>
+<!-- wrapper [e] -->
+<script src="../js/libs/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+(function (win, $) {
+    var colors = ['pink', 'skyblue', 'violet', 'gray'];
+    
+    //처음부터 순서대로 일치하게 하시오
+    var orderFunc = {
+        init : function() {
+            this.setElements();
+            this.bindEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(0),
+            this.btn = this.obj.find('button'),
+            this.objLi = this.obj.find('li'),
+            this.liLength = this.objLi.length,
+            this.currentIndex = 0,
+            this.colorIndex = 0,
+            this.color = colors[0];
+        },
+        bindEvent : function () {
+            this.btn.on('click', $.proxy(this.changeColor, this));
+        },
+        changeColor : function () {
+            if (this.currentIndex > this.liLength-1) {
+                this.currentIndex = 0;
+                this.randomColor();
+            }
+            this.objLi.eq(this.currentIndex).css('background', this.color);
+            this.currentIndex++;
+        },
+        randomColor : function() {
+            this.colorIndex++;
+            this.color = colors[this.colorIndex];
+            if (this.colorIndex >= colors.length) {
+                this.colorIndex = 0;
+                this.color = colors[0];
+            }
+        }
+    };
+
+    //마지막부터 역순대로 일치하게 하시오
+    var inverseFunc = {
+        init : function() {
+            this.setElements();
+            this.bindEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(1),
+            this.btn = this.obj.find('button'),
+            this.objLi = this.obj.find('li'),
+            this.liLength = this.objLi.length,
+            this.currentIndex = this.liLength-1,
+            this.colorIndex = 0,
+            this.color = colors[0];
+        },
+        bindEvent : function () {
+            this.btn.on('click', $.proxy(this.changeColor, this));
+        },
+        changeColor : function () {
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.liLength-1;
+                this.randomColor();
+            }
+            this.objLi.eq(this.currentIndex).css('background', this.color);
+            this.currentIndex--;
+        },
+        randomColor : function() {
+            this.colorIndex++;
+            this.color = colors[this.colorIndex];
+            if (this.colorIndex >= colors.length) {
+                this.colorIndex = 0;
+                this.color = colors[0];
+            }
+        }
+    };
+
+    //순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오
+    var orderFunc2 = {
+        init : function() {
+            this.setElements();
+            this.bindEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(2),
+            this.btnPlus = this.obj.find('button').eq(0),
+            this.btnMinus = this.obj.find('button').eq(1),
+            this.objLi = this.obj.find('li'),
+            this.liLength = this.objLi.length,
+            this.currentIndex = 0,
+            this.colorIndex = 0,
+            this.colorOldIndex = this.currentIndex,
+            this.color = colors[0];
+        },
+        bindEvent : function () {
+            this.btnPlus.on('click', $.proxy(this.changeColor, this));
+            this.btnMinus.on('click', $.proxy(this.changeColor2, this));
+        },
+        changeColor : function () {
+            // console.log(this.colorOldIndex , this.currentIndex);
+            if (this.currentIndex > this.liLength-1) {
+                this.currentIndex = 0;
+                this.randomColor();
+            }
+            this.objLi.eq(this.currentIndex).css('background', this.color);
+            this.objLi.eq(this.colorOldIndex).css('background', '');
+            this.colorOldIndex = this.currentIndex;
+            this.currentIndex++;
+        },
+        changeColor2 : function () {
+            // console.log(this.colorOldIndex , this.currentIndex);
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.liLength-1;
+                this.randomColor();
+            }
+            this.objLi.eq(this.currentIndex).css('background', this.color);
+            this.objLi.eq(this.colorOldIndex).css('background', '');
+            this.colorOldIndex = this.currentIndex;
+            this.currentIndex--;
+        },
+        randomColor : function() {
+            this.colorIndex++;
+            this.color = colors[this.colorIndex];
+            if (this.colorIndex >= colors.length) {
+                this.colorIndex = 0;
+                this.color = colors[0];
+            }
+        }
+    };
+
+    //순서대로 일치하게 하시고, 바로 전에 일치됐던 엘리먼트는 색을 지우시오.(클래스 제어)
+    var orderFunc3 = {
+        init : function() {
+            this.setElements();
+            this.bindEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(3),
+            this.btnPlus = this.obj.find('button').eq(0),
+            this.btnMinus = this.obj.find('button').eq(1),
+            this.objLi = this.obj.find('li'),
+            this.liLength = this.objLi.length,
+            this.currentIndex = 0,
+            this.colorIndex = 0,
+            this.colorOldIndex = this.currentIndex,
+            this.color = colors[0];
+        },
+        bindEvent : function () {
+            this.btnPlus.on('click', $.proxy(this.changeColor, this));
+            this.btnMinus.on('click', $.proxy(this.changeColor2, this));
+        },
+        changeColor : function () {
+            if (this.currentIndex > this.liLength-1) {
+                this.currentIndex = 0;
+            }
+            this.objLi.eq(this.currentIndex).addClass('active');
+            this.objLi.eq(this.colorOldIndex).removeClass('active');
+            this.colorOldIndex = this.currentIndex;
+            this.currentIndex++;
+        },
+        changeColor2 : function () {
+            if (this.currentIndex < 0) {
+                this.currentIndex = this.liLength-1;
+            }
+            this.objLi.eq(this.currentIndex).addClass('active');
+            this.objLi.eq(this.colorOldIndex).removeClass('active');
+            this.colorOldIndex = this.currentIndex;
+            this.currentIndex--;
+        }
+    };
+
+    // 짝수는 text / 홀수는 checkbox 
+    var funcInput = {
+        init : function () {
+            this.setElements();
+            this.inputEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(4);
+        },
+        inputEvent : function () {
+            for(var i=0 ; i<5 ; i++) {
+                if(i % 2 == 0){
+                    this.obj.append('<div><input id="oddInput' + i + '" type="text"><label for="oddInput' + i + '">짝수</label></div>');
+                } else {
+                    this.obj.append('<div><input id="oddInput' + i + '" type="checkbox"><label for="oddInput' + i + '">홀수</label></div>');
+                }
+            }
+        }
+    };
+
+    //구구단 7단
+    var guguDan7 = {
+        init : function () {
+            this.setElements();
+            this.guguDanEvent();
+        },
+        setElements : function () {
+            this.obj = $('.exam_wrap').eq(5);
+        },
+        guguDanEvent : function () {
+            for(var i=1 ; i<10 ; i++) {
+                this.obj.append('<p>' + '7' + ' * ' + i + ' = ' + (7 * i) + '</p>');
+            }
+        }
+    };
+
+    // 구구단 2~9단
+    var guguDanAll = {
+        init : function() {
+            this.setElements();
+            this.guguDanEvent();
+        },
+        setElements : function() {
+            this.obj = $('.exam_wrap').eq(6);
+            this.startNum = 2;
+        },
+        guguDanEvent : function() {
+            while (this.startNum < 10) {
+                for(var i=1 ; i<10 ; i++) {
+                    this.obj.append('<p>' + this.startNum + ' * ' + i + ' = ' + (this.startNum * i) + '</p>');
+                }
+                this.startNum++;
+            }
+        }
+    };
+    
+    $(function() {
+        orderFunc.init();
+        inverseFunc.init();
+        orderFunc2.init();
+        orderFunc3.init();
+        funcInput.init();
+        guguDan7.init();
+        guguDanAll.init();
+    });
+})(window, window.jQuery);
+</script>
+</body>
+</html>
