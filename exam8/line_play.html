@@ -62,34 +62,39 @@ button::-moz-focus-inner{padding:0;border:0}
         init : function() {
             this.setElements();
             this.arrayRandomFunc();
+            this.numRandom();
             this.bindEvents();
         },
         setElements : function () {
             this.obj = $('.create_wrap');
             this.btnRandom = this.obj.find('.btn_random');
             this.chageList = this.obj.find('.swiper-wrapper li');
-            this.elemArray = $('.swiper-wrapper li').toArray();
-            this.lastIndex;
         },
         arrayRandomFunc : function () {
             this.arrayRandom = [];
             for(var i=0 ; i<this.chageList.length ; i++){
                 this.arrayRandom[i] = i;
-                // console.log(this.arrayRandom[i] = i);
             }
         },
         numRandom : function() {
-            console.log('numRandom : ', this.lastIndex)
-            this.arrayRandom.splice(this.lastIndex, 1);
-            this.random = Math.floor(Math.random() * this.chageList.length);
+            if(this.arrayRandom.length == 0){
+                this.arrayRandomFunc();
+            }
+            this.random = Math.floor(Math.random() * this.arrayRandom.length);
+            this.arrayIndex = this.arrayRandom[this.random];
+        },
+        spliceArray : function() {
+            this.arrayRandom.splice(this.random, 1);
+            this.oldIndex = this.arrayIndex;
         },
         viewAvatar : function() {
-            this.numRandom();
-            this.chageList.fadeOut();
-            console.log(this.random);
-            this.chageList.eq(this.random).fadeIn();
-            this.lastIndex = this.random;
-            console.log('lastIndex : ' , this.lastIndex + ' || arrayRandom : ', this.arrayRandom);
+            this.spliceArray();
+            while (this.arrayIndex === this.oldIndex) {
+                this.numRandom();
+            }
+            this.chageList.hide();
+            this.chageList.eq(this.arrayIndex).fadeIn();
+            // console.log('arrayIndex : ' + this.arrayIndex , ' || oldIndex : ' + this.oldIndex, ' || arrayRandom : ' , this.arrayRandom);
         },
         bindEvents : function () {
             this.btnRandom.on('click', $.proxy(this.viewAvatar, this));
