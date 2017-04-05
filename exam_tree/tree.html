@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Tree Menu :: JS STUDY</title> <!-- [D] 페이지 마다 title 텍스트 변경됨 // 공통규칙 -->
+<link rel="stylesheet" type="text/css" href="css/tree.css">
+</head>
+<body>
+<!-- [D] 전페이지 공통 건너띄기 링크 제공 -->
+<ul id="skip">
+<li><a href="#lnb" onclick="document.getElementById('lnb').tabIndex=-1;document.getElementById('lnb').focus();return false;">주 메뉴 바로가기</a></li>
+<li><a href="#content" onclick="document.getElementById('content').tabIndex=-1;document.getElementById('content').focus();return false">본문 바로가기</a></li>
+</ul>
+<!-- //[D] 전페이지 공통 건너띄기 링크 제공 -->
+
+<hr>
+
+<div id="wrap">
+    <!-- [D] HEADER -->
+    <div id="header" role="banner">
+        <h1>Tree Menu</h1>
+    </div>
+    <!-- //[D] HEADER -->
+
+    <hr>
+
+    <!-- [D] CONTAINER -->
+    <div id="container">
+        <!-- 트리메뉴-->
+        <div class="tree_wrap">
+            <ul id="tree_menu" class="tree_menu">
+            <li class="depth_1">
+                <strong class="depth_tit">1 Depth</strong>
+                <ul class="depth_2" >
+                <li class="tree_open"> <!--[D] menu 오픈시 .tree_open 추가 -->
+                    <a href="#" class="depth2_tit">2Depth <span>:: menu 열릴시 .tree_open 추가</span></a>
+                    <ul class="depth_3">
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li class="end"><a href="#">3 Depth</a></li>
+                    </ul>
+                </li>
+                <li class="last">
+                    <a href="#" class="depth2_tit"> 2Depth</a>
+                    <ul class="depth_3">
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li class="end"><a href="#">3 Depth</a></li>
+                    </ul>
+                </li>
+                </ul>
+            </li>
+            <li class="depth_1">
+                <strong class="depth_tit">1 Depth</strong>
+                <ul class="depth_2" >
+                <li>
+                    <a href="#" class="depth2_tit">2Depth</a>
+                    <ul class="depth_3">
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li class="end"><a href="#">3 Depth</a></li>
+                    </ul>
+                </li>
+                <li class="last tree_open"> <!--[D] menu 오픈시 .tree_open 추가 -->
+                    <a href="#" class="depth2_tit">2Depth <span>:: menu 열릴시 .tree_open 추가</span></a>
+                    <ul class="depth_3">
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li><a href="#">3 Depth</a></li>
+                    <li class="end"><a href="#">3 Depth</a></li>
+                    </ul>
+                </li>
+                </ul>
+            </li>
+            </ul>
+        </div>
+        <!--//트리메뉴-->
+    </div>
+    <!-- //[D] CONTAINER -->
+
+    <hr>
+
+    <!-- [D] FOOTER -->
+    <div id="footer" role="contentinfo"></div>
+    <!-- //[D] FOOTER -->
+</div>
+
+</body>
+</html>

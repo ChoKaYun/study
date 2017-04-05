@@ -61,6 +61,7 @@ button::-moz-focus-inner{padding:0;border:0}
     var lineplay = {
         init : function() {
             this.setElements();
+            this.arrayRandomFunc();
             this.bindEvents();
         },
         setElements : function () {
@@ -68,22 +69,27 @@ button::-moz-focus-inner{padding:0;border:0}
             this.btnRandom = this.obj.find('.btn_random');
             this.chageList = this.obj.find('.swiper-wrapper li');
             this.elemArray = $('.swiper-wrapper li').toArray();
-            this.random
+            this.lastIndex;
         },
-        arrayRandom : function () {
+        arrayRandomFunc : function () {
             this.arrayRandom = [];
             for(var i=0 ; i<this.chageList.length ; i++){
                 this.arrayRandom[i] = i;
-                console.log(this.arrayRandom[i] = i);
+                // console.log(this.arrayRandom[i] = i);
             }
         },
         numRandom : function() {
+            console.log('numRandom : ', this.lastIndex)
+            this.arrayRandom.splice(this.lastIndex, 1);
             this.random = Math.floor(Math.random() * this.chageList.length);
         },
         viewAvatar : function() {
             this.numRandom();
             this.chageList.fadeOut();
+            console.log(this.random);
             this.chageList.eq(this.random).fadeIn();
+            this.lastIndex = this.random;
+            console.log('lastIndex : ' , this.lastIndex + ' || arrayRandom : ', this.arrayRandom);
         },
         bindEvents : function () {
             this.btnRandom.on('click', $.proxy(this.viewAvatar, this));
