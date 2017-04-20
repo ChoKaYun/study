@@ -156,7 +156,7 @@ p{margin-bottom:30px;padding-bottom:10px;border-bottom:2px solid #da0707;font-si
             setChange : function(e) {
                 var target = $(e.currentTarget);
                 this.radioName = target.attr('name');
-                target.closest('.radio_box').toggleClass('chk_active', target.prop('checked'));
+                // target.closest('.radio_box').toggleClass('chk_active', target.prop('checked'));
                 this.sameCheck();
             },
             sameCheck : function() {
