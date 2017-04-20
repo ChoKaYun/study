@@ -85,7 +85,8 @@ button::-moz-focus-inner{padding:0;border:0}
 <script>
 (function (win, $) {
     'use strict';
-    win.examProject = win.examProject || {};
+    win.examProject = win.examProject || {}; //유효성 검사
+
     win.examProject.commonLayer = function (args) {
         var defParams = {
             type : 'default', // default, fade, slide
@@ -99,12 +100,14 @@ button::-moz-focus-inner{padding:0;border:0}
             closeBefore : null,
             closeAfter : null
         };
-        this.opts = $.extend({}, defParams, (args || {}));
-        if (!(this.btnObj = $(this.opts.btnElements)).length) return;
-        this.init();
+        this.opts = $.extend({}, defParams, (args || {})); //변수선언
+        if (!(this.btnObj = $(this.opts.btnElements)).length) return; //유효성 검사
+        this.init(); //실행문
     };
+    
+    // 관리의 용의성을 위해, win.examProject.commonLayer변수에 메서드에 선언하지 않고 별도로 메서드 선언
     win.examProject.commonLayer.prototype = {
-        init : function () {
+        init : function () {  // 페이지 로드 시 바로 실행될 구문 선언
             this.setElements();
             this.initLayout();
             this.bindEvents();
@@ -112,7 +115,7 @@ button::-moz-focus-inner{padding:0;border:0}
         reInit : function () {
             this.nextFocusFunc();
         },
-        setElements : function () {
+        setElements : function () { //변수 선언
             this.layerWrap = $(this.opts.layerWrapElement);
             this.layerObj = this.layerWrap.find(this.opts.layerElement);
             this.closeBtn = this.layerWrap.find(this.opts.closeElements);
@@ -120,15 +123,17 @@ button::-moz-focus-inner{padding:0;border:0}
         initLayout : function () {
             var focusOutTagClass = 'js-focusout',
                 focusOutTag = '<span class="' + focusOutTagClass + '" tabindex="0" style="overflow:hidden;position:absolute;left:0;top:0;z-index:-1;width:1px;height:1px;font-size:0;line-height:0"></span>';
+            // 레이어 컨텐츠 이전에 focusOutTag가 없을 시 실행. 
             if (!this.layerObj.prev().hasClass(focusOutTagClass)) {
-                this.layerObj.before(focusOutTag);
+                this.layerObj.before(focusOutTag); //컨텐츠 이전에 focus를 이동 시킬 태그 선언
             }
+            // 레이어 컨텐츠 다음에 focusOutTag가 없을 시 실행. 
             if (!this.layerObj.next().hasClass(focusOutTagClass)) {
-                this.layerObj.after(focusOutTag);
+                this.layerObj.after(focusOutTag); //컨텐츠 다음에 focus를 이동 시킬 태그 선언
             }
-            this.prevFocus = this.layerObj.prev();
-            this.nextFocus = this.layerObj.next();
-            this.layerObj.attr('tabIndex', 0);
+            this.prevFocus = this.layerObj.prev(); //변수 선언
+            this.nextFocus = this.layerObj.next(); //변수 선언
+            this.layerObj.attr('tabIndex', 0); //layerObj tabIndex 값 선언
         },
         bindEvents : function () {
             this.btnObj.on('click', $.proxy(this.layerView, this));
