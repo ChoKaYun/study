@@ -84,10 +84,11 @@ button::-moz-focus-inner{padding:0;border:0}
 <script src="js/jquery.ba-outside-events.min.js"></script>
 <script>
 (function (win, $) {
-    'use strict';
+    'use strict'; // mode. 오타,실수를 잡아줌
     win.examProject = win.examProject || {}; //유효성 검사
 
     win.examProject.commonLayer = function (args) {
+        // default 파타메터값 정의
         var defParams = {
             type : 'default', // default, fade, slide
             btnElements : '.js-layer-btn',
@@ -102,7 +103,7 @@ button::-moz-focus-inner{padding:0;border:0}
         };
         this.opts = $.extend({}, defParams, (args || {})); //변수선언
         if (!(this.btnObj = $(this.opts.btnElements)).length) return; //유효성 검사
-        this.init(); //실행문
+        this.init(); // prototype 함수 실행문
     };
     
     // 관리의 용의성을 위해, win.examProject.commonLayer변수에 메서드에 선언하지 않고 별도로 메서드 선언
@@ -112,7 +113,7 @@ button::-moz-focus-inner{padding:0;border:0}
             this.initLayout();
             this.bindEvents();
         },
-        reInit : function () {
+        reInit : function () { //백단개발에서 commonLayer 재사용를 대비한건가여?
             this.nextFocusFunc();
         },
         setElements : function () { //변수 선언
@@ -136,52 +137,55 @@ button::-moz-focus-inner{padding:0;border:0}
             this.layerObj.attr('tabIndex', 0); //layerObj tabIndex 값 선언
         },
         bindEvents : function () {
-            this.btnObj.on('click', $.proxy(this.layerView, this));
-            this.closeBtn.on('click', $.proxy(this.layerClose, this));
-            this.prevFocus.on('focusin', $.proxy(this.prevFocusFunc, this));
-            this.nextFocus.on('focusin', $.proxy(this.nextFocusFunc, this));
-            this.layerObj.on('keydown', $.proxy(this.escapeFunc, this));
+            this.btnObj.on('click', $.proxy(this.layerView, this)); //.js-layer-btn 클릭시, layerView() 실행
+            this.closeBtn.on('click', $.proxy(this.layerClose, this)); //.layer_close 클릭시, layerClose() 실행
+            this.prevFocus.on('focusin', $.proxy(this.prevFocusFunc, this)); //.js-layer 이전 .js-focusout에 포커싱시, prevFocusFunc() 실행
+            this.nextFocus.on('focusin', $.proxy(this.nextFocusFunc, this)); //.js-layer 다음 .js-focusout에 포커싱시, nextFocusFunc() 실행
+            this.layerObj.on('keydown', $.proxy(this.escapeFunc, this)); //.js-layer내에 키보드 입력 발생 시, escapeFunc() 실행
         },
-        layerClose : function () {
-           this.layerObj.triggerHandler('clickoutside');
+        layerClose : function () { 
+           this.layerObj.triggerHandler('clickoutside'); //clickoutside 핸들러고 인식하도록 선언, layerClickOutside(); 실행
         },
         outSideEvents : function () {
-            this.layerObj.on('clickoutside touchendoutside', $.proxy(this.layerClickOutside, this));
+            this.layerObj.on('clickoutside touchendoutside', $.proxy(this.layerClickOutside, this)); //레이어 컨텐츠 영역 외 클릭 시, layerClickOutside() 실행
         },
         escapeFunc : function (e) {
+            // esc를 누르면 layerClose() 실행
             var keyCode = e.which || e.keyCode;
             if (keyCode !== 27) return;
             this.layerClose();
         },
         layerView : function (e) {
-            this.btnTarget = $(e.currentTarget);
-            this.outCallback('viewBefore');
-            if (this.opts.type === 'default') {
+            this.btnTarget = $(e.currentTarget); //선택한 타겟 저장
+            this.outCallback('viewBefore'); //outCallback 호출
+            if (this.opts.type === 'default') { // layer 노출 타입에 따른 보여지는 animation 선언
+                console.log('aaaaaa', this.opts.type);
                 this.layerWrap.stop(true, true).show();
                 this.showAfterBugFunc();
             } else if (this.opts.type === 'fade') {
+                console.log('bbbbbb', this.opts.type);
                 this.layerWrap.stop(true, true).fadeIn(this.opts.speed, $.proxy(this.layerViewAfter, this));
             } else if (this.opts.type === 'slide') {
                 this.layerWrap.stop(true, true).slideDown(this.opts.speed, $.proxy(this.layerViewAfter, this));
             }
-            this.layerObj.focus();
+            this.layerObj.focus(); //layer에 포커싱
         },
-        showAfterBugFunc : function () {
-            win.clearTimeout(this.showAfterTimeout);
+        showAfterBugFunc : function () { //layer가 열린 후 30 있다가 layerViewAfter() 실행.
+            win.clearTimeout(this.showAfterTimeout); //setTimeOut 해제
             this.showAfterTimeout = win.setTimeout($.proxy(this.layerViewAfter, this), 30);
         },
         layerViewAfter : function () {
-            this.outSideEvents();
-            this.outCallback('viewAfter');
+            this.outSideEvents(); //outSideEvents 호출
+            this.outCallback('viewAfter'); //outCallback 호출
         },
         layerClickOutside : function () {
-            this.outCallback('closeBefore');
-            win.clearTimeout(this.closeBeforeTimeout);
+            this.outCallback('closeBefore'); //outCallback 호출
+            win.clearTimeout(this.closeBeforeTimeout); //setTimeout 해제
             this.closeBeforeTimeout = win.setTimeout($.proxy(this.hideBeforeBugFunc, this), 30);
-            this.layerObj.off('clickoutside touchendoutside');
+            this.layerObj.off('clickoutside touchendoutside'); //레이어 닫을 시에 outside 관련 이벤트 off 
         },
         hideBeforeBugFunc : function () {
-            if (this.opts.type === 'default') {
+            if (this.opts.type === 'default') { // layer 노출 타입에 따른 hide 시키는 animation 선언
                 this.layerWrap.stop(true, true).hide();
                 this.hideAfterBugFunc();
             } else if (this.opts.type === 'fade') {
@@ -192,20 +196,20 @@ button::-moz-focus-inner{padding:0;border:0}
             this.btnTarget.focus();
         },
         hideAfterBugFunc : function () {
-            win.clearTimeout(this.closeAfterTimeout);
-            this.closeAfterTimeout = win.setTimeout($.proxy(this.layerCloseAfter, this), 30);
+            win.clearTimeout(this.closeAfterTimeout);// setTimeout 해제
+            this.closeAfterTimeout = win.setTimeout($.proxy(this.layerCloseAfter, this), 30); //layerCloseAfter 실행
         },
         layerCloseAfter : function (e) {
-            this.layerClose();
-            this.outCallback('closeAfter');
+            this.layerClose(); //layerClose 호출
+            this.outCallback('closeAfter'); //outCallback 호출
         },
         prevFocusFunc : function () {
-            this.closeBtn.focus();
+            this.closeBtn.focus(); //레이어 이전의 .js-focusout으로 포커싱시, 닫기버튼으로 포커싱 이동
         },
         nextFocusFunc : function () {
-            this.layerObj.focus();
+            this.layerObj.focus(); //레이어 다음의 .js-focusout으로 포커싱시, 레이어컨텐츠로 포커싱 이동
         },
-        outCallback : function (type) {
+        outCallback : function (type) { //버블링 체크를 위한건가요??
             var callbackObject = this.opts[type];
             if (callbackObject !== null) {
                 callbackObject();
@@ -214,10 +218,10 @@ button::-moz-focus-inner{padding:0;border:0}
     };
 
     win.examProject.yoursObject = function () {
-        this.init();
+        this.init(); // prototype 함수 실행문
     };
     win.examProject.yoursObject.prototype = {
-        init : function () {
+        init : function () { // 페이지 로드 시 바로 실행될 구문 선언
             this.setElements();
             this.bindEvents();
             this.setLayer();
@@ -227,18 +231,18 @@ button::-moz-focus-inner{padding:0;border:0}
             this.youris = $('.your_tag');
         },
         bindEvents : function () {
-            this.btnis.on('click', $.proxy(this.btnisFunc, this));
+            this.btnis.on('click', $.proxy(this.btnisFunc, this)); //.btn_is 클릭시, btnisFunc 실행
         },
         btnisFunc : function (e) {
             e.preventDefault();
             this.youris.eq(0).hide();
             this.youris.eq(1).show();
-            this.posLayer.reInit();
-            this.posLayer2.reInit();
-            this.posLayer3.reInit();
+            this.posLayer.reInit(); //레이어컨텐츠로 포커싱
+            this.posLayer2.reInit(); //레이어컨텐츠로 포커싱
+            this.posLayer3.reInit(); //레이어컨텐츠로 포커싱
         },
         setLayer : function () {
-            this.posLayer = new win.examProject.commonLayer({
+            this.posLayer = new win.examProject.commonLayer({ //win.examProject.commonLayer의 파라메터값 재 정의
                 type : 'fade',
                 btnElements : '.js-btn-fade button',
                 layerWrapElement : '.js-layer_area',
@@ -250,7 +254,7 @@ button::-moz-focus-inner{padding:0;border:0}
                 closeBefore : $.proxy(this.closeBefore, this),
                 closeAfter : $.proxy(this.closeAfter, this)
             });
-            this.posLayer2 = new win.examProject.commonLayer({
+            this.posLayer2 = new win.examProject.commonLayer({ //win.examProject.commonLayer의 파라메터값 재 정의
                 btnElements : '.js-btn-default button',
                 layerWrapElement : '.js-layer_area',
                 layerElement : '.layer_pos',
@@ -260,7 +264,7 @@ button::-moz-focus-inner{padding:0;border:0}
                 closeBefore : $.proxy(this.closeBefore, this),
                 closeAfter : $.proxy(this.closeAfter, this)
             });
-            this.posLayer3 = new win.examProject.commonLayer({
+            this.posLayer3 = new win.examProject.commonLayer({ //win.examProject.commonLayer의 파라메터값 재 정의
                 type : 'slide',
                 btnElements : '.js-btn-slide button',
                 layerWrapElement : '.js-layer_area',
@@ -273,21 +277,21 @@ button::-moz-focus-inner{padding:0;border:0}
                 closeAfter : $.proxy(this.closeAfter, this)
             });
         },
-        viewBefore : function () {
+        viewBefore : function () { //테스트용?인가요?? 백단 개발할때 여기다 하라고 임의로 작성하는건가요?
             if (win.console) win.console.log('layer View Before');
         },
-        viewAfter : function () {
+        viewAfter : function () { //테스트용?인가요?? 백단 개발할때 여기다 하라고 임의로 작성하는건가요?
             if (win.console) win.console.log('layer View After');
         },
-        closeBefore : function () {
+        closeBefore : function () { //테스트용?인가요?? 백단 개발할때 여기다 하라고 임의로 작성하는건가요?
             if (win.console) win.console.log('layer Close Before');
         },
-        closeAfter : function () {
+        closeAfter : function () { //테스트용?인가요?? 백단 개발할때 여기다 하라고 임의로 작성하는건가요?
             if (win.console) win.console.log('layer Close After');
         }
     };
     $(function () {
-        win.examYours = new win.examProject.yoursObject();
+        win.examYours = new win.examProject.yoursObject(); //함수호출
     });
 })(window, window.jQuery);
 </script>
