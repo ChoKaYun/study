@@ -1,0 +1,20 @@
+<html>
+<head>
+    <title>hello vew :: Vue</title>
+</head>
+<body>
+<div class="wrap">
+    {{ message }}
+</div>
+
+<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+<script>
+new Vue({
+    el: '.wrap',
+    data: {
+        message: 'Hello Vue.js!'
+    }
+})
+</script>
+</body>
+</html>
